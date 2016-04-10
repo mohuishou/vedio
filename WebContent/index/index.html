@@ -1,0 +1,68 @@
+<#include "/public/base.html" />
+<#macro  style>
+<style>
+		html,body{
+			height: 100%;
+		}
+		body{
+		     background-color: rgba(204,204,204,0.2);
+		}
+		p,h3{
+			color: rgb(102,102,102);
+		}
+		#reg .form-group,.col-md-3{
+			margin:20px auto;
+		}
+		#reg .form-group label{
+			padding-left: 20px;
+		}
+		.form-control:focus{
+			border-color: rgb(6,198,167);
+		}
+		.form-group-label.control-focus .floating-label{
+			color: rgb(6,198,167);
+		}
+		.btn{
+			background-color: rgb(6,198,167);
+			color: #fff;
+		}
+		#main{
+			display: table;
+			height: 80%;
+		}
+		#reg{
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+
+		}
+		#reg a{
+			color: rgb(102,102,102);
+			font-size: 13px;
+			text-decoration: none;
+		}
+		footer{
+			color: rgb(102,102,102);
+			position: absolute;
+			bottom: 0;
+			left: 50px;
+		}
+	</style>
+</#macro>
+
+<#macro main>
+
+<div class="row" id="reg">
+	<h3>注册</h3>
+
+	<p>Video++将发送一封验证邮件到您的邮箱,此邮箱将作为登录用户名</p>
+	<p>请输入你需要注册的邮箱</p>
+	<div class="form-group form-group-label col-md-9">
+		<label class="floating-label" for="send">请输入邮箱地址</label>
+		<input class="form-control" id="send" type="email"></div>
+	<div class="col-md-3">
+		<button class="btn  waves waves-attach waves-effect waves-light">发送邮件</button>
+	</div>
+	<a href="login.html">已有账号?点击登陆</a>
+</div>
+</#macro>

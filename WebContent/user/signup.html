@@ -1,0 +1,104 @@
+<#include "/public/base.html" />
+<#macro  style>
+<style>
+		html,body{
+			height: 100%;
+		}
+		body{
+		     background-color: rgba(204,204,204,0.2);
+		}
+		p,h3{
+			color: rgb(102,102,102);
+		}
+		#reg .form-group,.col-md-3{
+			margin:20px auto;
+		}
+		#reg .form-group label{
+			padding-left: 20px;
+		}
+		form .form-control:focus{
+			border-color: rgb(6,198,167);
+		}
+		.form-group-label.control-focus .floating-label{
+			color: rgb(6,198,167);
+		}
+		form .btn{
+			background-color: rgb(6,198,167);
+			color: #fff;
+		}
+		#main{
+			display: table;
+			height: 80%;
+		}
+		#reg{
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+
+		}
+		#reg a{
+			color: rgb(102,102,102);
+			font-size: 13px;
+			text-decoration: none;
+		}
+	
+	</style>
+</#macro>
+
+<#macro main>
+
+<div class="row" id="reg">
+<h3>注册</h3>
+
+<p>Video++将发送一封验证邮件到您的邮箱,此邮箱将作为登录用户名</p>
+<p>请输入你需要注册的邮箱</p>
+<form>
+<div class="form-group form-group-label col-md-9">
+	
+		<label class="floating-label" for="email">请输入邮箱地址</label>
+		<input class="form-control" required id="email" type="email"></div>
+		<div class="col-md-3">
+			<button class="btn  waves waves-attach waves-effect waves-light">发送邮件</button>
+		</div>
+		<a href="login.html">已有账号?点击登陆</a>
+	</form>
+
+</div>
+<div aria-hidden="true" class="modal modal-va-middle fade" id="mAlert" role="dialog" tabindex="-1" style="display: none;">
+		<div class="modal-dialog modal-xs">
+			<div class="modal-content">
+				<div class="modal-inner">
+					<p id="msg" class="h5 margin-top-sm text-black-hint"></p>
+				</div>
+				<div class="modal-footer">
+					<p class="text-right"><a id="url" class="btn btn-flat btn-brand waves-attach waves-effect" href="">确定</a>
+					<a data-dismiss="modal" class="btn btn-flat btn-brand-accent waves-attach waves-effect" href="">取消</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</#macro>
+
+<#macro script>
+<script type="text/javascript">
+
+		$("form").submit(function(event) {
+			var email=$("#email").val();
+			$.get('http://lxl.520:8089/auth/signupSend?email='+email,function(data,status){
+					if(data.code==200){
+						mAlert('邮件已经发送成功，如果没有收到请检查一下垃圾邮箱，谢谢！点击确定调转到首页','/');
+					}else if(data.code==10006){
+						mAlert('邮箱已经被注册，点击确认跳转到登陆界面，点击取消重新输入！','/user/login');
+					}
+			});
+			return false;
+		});
+
+		function mAlert(msg,url){
+			$('#msg').text(msg);
+			$("#url").attr('href',url);
+			$('#mAlert').modal('show');
+		}
+	
+</script>
+</#macro>
