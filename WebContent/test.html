@@ -1,0 +1,23 @@
+<div id="camera" style="left: -400px;"><object id="camcorder_1460303313153" width="100%" height="100%" type="application/x-shockwave-flash" data="/swf/camcorder.swf" style="visibility: visible;"><param name="wmode" value="transparent"><param name="flashvars" value="mode=record&amp;serverURL=rtmp://121.42.141.249/myapp&amp;jsCallback=function (t, arg) {
+        if('camera.muted' === t) {
+          if(camera != undefined) {
+            cameraStatus = 'muted';
+            mixpanel.track(&quot;FLASH Camera Muted&quot;);
+          }
+          alert(&quot;请允许访问摄像头，以便我们采集观看体验&quot;);
+        }else if('camera.ready' === t || 'microphone.ready' === t) {
+          cameraStatus = 'ready';
+          mixpanel.track(&quot;FLASH Camera Ready&quot;);
+          $(&quot;#calibrate-done&quot;).attr(&quot;disabled&quot;, false);
+          $(&quot;#calibrate-done&quot;).text(&quot;马上开始&quot;);
+        }else if('camera.nocamera' === t){
+          cameraStatus = 'nocamera';
+          mixpanel.track(&quot;FLASH Camera Not Detected&quot;);
+          alert(&quot;未检测到摄像头，请使用有摄像头的电脑观看&quot;);
+          window.close();
+        }
+
+        // console.log(&quot;Camera Status: &quot; );
+        // console.log(cameraStatus );
+
+      }&amp;recordId=camera_104_emo-327617&amp;debugMode=true"></object></div>
